@@ -36,7 +36,7 @@ bash "install_thrift" do
   cwd Chef::Config[:file_cache_path]
   code <<-EOH
     (tar -zxvf thrift-#{version}.tar.gz)
-    (cd thrift-#{version} && ./configure #{node['thrift']['configure_options'].join(' ')})
+    (cd thrift-#{version} && chmod +x ./configure && ./configure #{node['thrift']['configure_options'].join(' ')})
     (cd thrift-#{version} && make install)
   EOH
   not_if { FileTest.exists?("/usr/local/bin/thrift") }
